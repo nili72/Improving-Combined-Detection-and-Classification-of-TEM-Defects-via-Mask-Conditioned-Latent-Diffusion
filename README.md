@@ -7,27 +7,7 @@ conda env create -f environment.yml
 # Training and Sampling
 Training information and additional README can be found in each model subfolder.
 
-## 1. Diffusion model for generating mask(s)
-To change directory:
-```bash
-export OPENAI_LOGDIR={OUTPUT_FOLDER}
-```
-Model parameters:
-```bash
-MODEL_FLAGS="--image_size 256 --num_channels 128 --num_res_blocks 2 --num_heads 1 --learn_sigma True --use_scale_shift_norm False --attention_resolutions 16"
-DIFFUSION_FLAGS="--diffusion_steps 1000 --noise_schedule linear --rescale_learned_sigmas False --rescale_timesteps False"
-TRAIN_FLAGS="--lr 1e-4 --batch_size 2"
-```
-Training:
-```bash
-python improved-diffusion/scripts/image_train.py --data_dir ./improved-diffusion/datasets/Kvasir-SEG/masks $MODEL_FLAGS $DIFFUSION_FLAGS $TRAIN_FLAGS
-```
-Sampling:
-```bash
-python improved-diffusion/scripts/image_sample.py --num_samples {SAMPLES} --model_path {MODEL_CHECKPOINT.pt} --output {OUTPUT_TYPE} --postprocess {POSTPROCESS} $MODEL_FLAGS $DIFFUSION_FLAGS
-```
-
-## 2. Conditional diffusion model for generating polyp images
+## Conditional diffusion model for generating polyp images
 Training:
 ```bash
 python latent-diffusion/main.py --base latent-diffusion/configs/latent-diffusion/kvasir-ldm-vq4-.yaml -t --gpus 0,
