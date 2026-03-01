@@ -1,0 +1,61 @@
+# Improving Combined Detection and Classification of TEM Defects via Mask-Conditioned Latent Diffusion
+
+This repository contains the implementation of the mask-conditioned Latent Diffusion Model (LDM) pipeline and the Mask R-CNN workflow used in our study on generative data augmentation for TEM defect detection and classification.
+
+The project is organized into two main branches:
+
+---
+
+## 🌿 Branch Structure
+
+### 🔹 LDM Branch
+
+The `LDM` branch contains the implementation of the **mask-conditioned Latent Diffusion Model** used for synthetic microscopy image generation.
+
+#### Contents
+- `main.py` – Training script for the mask-conditioned LDM
+- `.yml` configuration files – Model architecture and training setup
+- Inference scripts – Generate synthetic SEM/TEM images conditioned on simulated masks
+
+#### Functionality
+- Train a mask-conditioned LDM using experimental image–mask pairs
+- Generate synthetic microscopy images from simulated masks
+- Save generated image–mask pairs for downstream Mask R-CNN training
+
+---
+
+### 🔹 Mask R-CNN Branch
+
+The `Mask R-CNN` branch contains the pipeline used for mask simulation, training, and evaluation of the defect detection model.
+
+#### Contents
+- Code for simulating defect masks based on statistical distributions of real masks
+- Mask R-CNN training scripts
+- Evaluation scripts for computing detection and classification metrics
+
+#### Functionality
+- Sample simulated masks from real defect distributions
+- Prepare training and testing splits
+- Train Mask R-CNN models on:
+  - Experimental data only (EXP)
+  - Experimental + Generated data (EXP+GEN)
+- Evaluate model performance using:
+  - `F1_detect`
+  - `F1_class`
+
+---
+
+## 🧠 Overall Workflow
+
+1. Simulate masks (Mask R-CNN branch)
+2. Train mask-conditioned LDM (LDM branch)
+3. Generate synthetic microscopy images from simulated masks
+4. Train Mask R-CNN using EXP or EXP+GEN datasets
+5. Evaluate detection and classification performance
+
+---
+
+Please refer to the readme file on each branch for detailed environment settings.
+
+---
+
